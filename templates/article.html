@@ -50,7 +50,6 @@
   {% for tag in article.tags %}
     <meta name="tags" content="{{tag}}">
   {% endfor %}
-
   {% include 'partials/og_article.html' %}
   {% include 'partials/jsonld_article.html' %}
 {% endblock %}
@@ -186,7 +185,9 @@
 
                 </section>
 
-                {% if DISQUS_SITENAME and SITEURL and article.status != "draft" %}
+                {% if GITMENT_ID and GITMENT_SECRET %}
+                {% include 'partials/gitment.html' %}
+                {% elif DISQUS_SITENAME and SITEURL and article.status != "draft" %}
                 <script type="text/javascript">
                     var disqus = '{{ DISQUS_SITENAME }}';
                     var disqus_shortname = '{{ DISQUS_SITENAME }}';
@@ -207,6 +208,7 @@
                     <div id="disqus_thread"></div>
                 </section>
                 {% endif %}
+
 
                 <aside class="post-nav">
                     {% if article.next_article %}
